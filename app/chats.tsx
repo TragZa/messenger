@@ -19,6 +19,7 @@ export default function Chats() {
     const response = await fetch(`/api/user_conversations`, {
       method: "GET",
     });
+
     const data = await response.json();
     setChats(data.emails);
   };
