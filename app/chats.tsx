@@ -25,7 +25,7 @@ export default function Chats() {
 
   useEffect(() => {
     if (session) {
-      setTimeout(fetchChats, 3000);
+      fetchChats();
     }
   }, [session]);
 
