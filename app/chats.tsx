@@ -18,11 +18,7 @@ export default function Chats() {
   const fetchChats = async () => {
     const response = await fetch(`/api/user_conversations`, {
       method: "GET",
-      headers: {
-        "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
-      },
     });
-
     const data = await response.json();
     setChats(data.emails);
   };
