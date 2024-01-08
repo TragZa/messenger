@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     }
 
     const email = session?.user?.email;
-      
+    
     const response = await sql`
     SELECT conversation_id FROM user_conversations WHERE email = ${email}`;
 
