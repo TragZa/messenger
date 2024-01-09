@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useStore } from "./store/useEmail";
+import { useStore } from "../store/useEmail";
 
 type Chat = {
   email: string;
