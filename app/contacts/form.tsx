@@ -83,7 +83,7 @@ export default function Form() {
   };
 
   const createGroup = async () => {
-    const response = await fetch(`/api/handleChats2`, {
+    const response = await fetch(`/api/createGroup`, {
       method: "POST",
       body: JSON.stringify({
         groupName: groupName,
