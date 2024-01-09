@@ -52,7 +52,7 @@ export default function Sidebar() {
               ? "bg-green"
               : "hover:bg-green2 hover:text-black active:bg-green3"
           }`}
-          href="/"
+          href="/chats"
         >
           Chats
         </Link>
