@@ -48,7 +48,7 @@ export default function Sidebar() {
         )}
         <Link
           className={`rounded-lg w-[250px] h-[30px] flex flex-col items-center justify-center ${
-            pathname === "/"
+            pathname === "/chats"
               ? "bg-green"
               : "hover:bg-green2 hover:text-black active:bg-green3"
           }`}
