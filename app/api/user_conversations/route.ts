@@ -29,9 +29,7 @@ export async function GET(request: Request) {
       }
     }
 
-    const nextResponse = NextResponse.json({ emails });
-    nextResponse.headers.set('Cache-Control', 'no-cache');
-    return nextResponse;
+    return NextResponse.json({ emails });
   } catch (e) {
     return NextResponse.json({ error: 'An error occurred' })
   }
