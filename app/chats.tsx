@@ -16,7 +16,7 @@ export default function Chats() {
   const { setEmail } = useStore();
 
   const fetchChats = async () => {
-    const response = await fetch(`/api/user_conversations`, {
+    const response = await fetch(`/api/conversations`, {
       method: "GET",
     });
     const data = await response.json();
