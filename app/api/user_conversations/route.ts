@@ -34,3 +34,4 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'An error occurred' })
   }
 }
+export const revalidate = 0;
