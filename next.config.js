@@ -1,4 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {generateEtags: false}
+const nextConfig = {}
 
 module.exports = nextConfig
