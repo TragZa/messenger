@@ -1,3 +1,5 @@
-export default function Home() {
-  return <div></div>;
+import Chats from "./chats";
+
+export default function Page() {
+  return <Chats />;
 }
