@@ -19,6 +19,20 @@ export default function Form() {
   const router = useRouter();
   const { setEmail } = useStore();
 
+  const fetchContacts = async () => {
+    const response = await fetch(`/api/contacts`, {
+      method: "GET",
+    });
+    const data = await response.json();
+    setContacts(data.contacts);
+  };
+
+  useEffect(() => {
+    if (session) {
+      fetchContacts();
+    }
+  }, [session]);
+
   const addContacts = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -45,20 +59,6 @@ export default function Form() {
     });
     fetchContacts();
   };
-
-  const fetchContacts = async () => {
-    const response = await fetch(`/api/contacts`, {
-      method: "GET",
-    });
-    const data = await response.json();
-    setContacts(data.contacts);
-  };
-
-  useEffect(() => {
-    if (session) {
-      fetchContacts();
-    }
-  }, [session]);
 
   const handleCheckboxChange = (contactEmail: string) => {
     if (selectedContacts.includes(contactEmail)) {

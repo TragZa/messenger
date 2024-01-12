@@ -31,16 +31,38 @@ export default function Conversation() {
     if (!email) {
       router.push("/");
     }
+
+    const pusher = new Pusher("76cdfe6a239fad68b82a", {
+      cluster: "ap2",
+    });
+    const channel = pusher.subscribe("my-channel");
+    channel.bind("my-event", fetchMessages);
+
+    return () => {
+      channel.unbind("my-event", fetchMessages);
+      pusher.unsubscribe("my-channel");
+    };
   }, [email]);
 
-  const pusher = new Pusher("76cdfe6a239fad68b82a", {
-    cluster: "ap2",
-  });
+  const fetchMessages = async () => {
+    const response = await fetch(
+      `/api/messages?contactEmail=${encodeURIComponent(email)}`,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    setMessages(data.messages);
+    setConversation({
+      created_on: data.conversationCreatedOn,
+    });
+  };
 
-  const channel = pusher.subscribe("my-channel");
-  channel.bind("my-event", function () {
-    fetchMessages();
-  });
+  useEffect(() => {
+    if (session) {
+      fetchMessages();
+    }
+  }, [session]);
 
   const addMessages = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -68,26 +90,6 @@ export default function Conversation() {
     });
     fetchMessages();
   };
-
-  const fetchMessages = async () => {
-    const response = await fetch(
-      `/api/messages?contactEmail=${encodeURIComponent(email)}`,
-      {
-        method: "GET",
-      }
-    );
-    const data = await response.json();
-    setMessages(data.messages);
-    setConversation({
-      created_on: data.conversationCreatedOn,
-    });
-  };
-
-  useEffect(() => {
-    if (session) {
-      fetchMessages();
-    }
-  }, [session]);
 
   return (
     <div className="flex flex-col gap-5 items-center">
