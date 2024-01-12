@@ -11,6 +11,7 @@ const pusher = new Pusher({
   useTLS: true
 });
 
+
 export async function POST(request: Request) {
   try {
     const session = await getServerSession();
