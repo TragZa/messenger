@@ -41,10 +41,11 @@ export async function POST(request: Request) {
       }
 
       const response = await sql`INSERT INTO messages (email, conversation_id, message_text) VALUES (${userEmail}, ${conversationId}, ${message})`;
-      pusher.trigger('my-channel', 'my-event', {
-        message: message
-      });
     }
+
+    pusher.trigger('my-channel', 'my-event', {
+      message: message
+    });
 
     return NextResponse.json({ message: 'success' });
   } catch (e) {
