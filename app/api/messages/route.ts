@@ -4,10 +4,10 @@ import { sql } from '@vercel/postgres';
 import Pusher from 'pusher';
 
 const pusher = new Pusher({
-  appId: 'YOUR_APP_ID',
-  key: 'YOUR_APP_KEY',
-  secret: 'YOUR_APP_SECRET',
-  cluster: 'YOUR_APP_CLUSTER',
+  appId: process.env.app_id || "",
+  key: process.env.key || "",
+  secret: process.env.secret || "",
+  cluster: process.env.cluster || "",
   useTLS: true
 });
 
