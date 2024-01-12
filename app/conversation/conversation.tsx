@@ -27,15 +27,20 @@ export default function Conversation() {
     : email;
   const router = useRouter();
 
-  const pusher = new Pusher("76cdfe6a239fad68b82a", {
-    cluster: "ap2",
-  });
-
   useEffect(() => {
     if (!email) {
       router.push("/");
     }
   }, [email]);
+
+  const pusher = new Pusher("76cdfe6a239fad68b82a", {
+    cluster: "ap2",
+  });
+
+  const channel = pusher.subscribe("my-channel");
+  channel.bind("my-event", function () {
+    fetchMessages();
+  });
 
   const addMessages = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,12 +87,6 @@ export default function Conversation() {
     if (session) {
       fetchMessages();
     }
-
-    var channel = pusher.subscribe("my-channel");
-
-    channel.bind("my-event", function () {
-      fetchMessages();
-    });
   }, [session]);
 
   return (
