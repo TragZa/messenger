@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { useStore } from "../store/useEmail";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Pusher from "pusher-js";
 
 type Message = {
   email: string;
@@ -25,6 +26,10 @@ export default function Conversation() {
     ? email.substring(0, email.indexOf("@"))
     : email;
   const router = useRouter();
+
+  const pusher = new Pusher("76cdfe6a239fad68b82a", {
+    cluster: "ap2",
+  });
 
   useEffect(() => {
     if (!email) {
@@ -77,6 +82,12 @@ export default function Conversation() {
     if (session) {
       fetchMessages();
     }
+
+    var channel = pusher.subscribe("my-channel");
+
+    channel.bind("my-event", function () {
+      fetchMessages();
+    });
   }, [session]);
 
   return (

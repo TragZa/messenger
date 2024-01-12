@@ -1,6 +1,15 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { sql } from '@vercel/postgres';
+import Pusher from 'pusher';
+
+const pusher = new Pusher({
+  appId: 'YOUR_APP_ID',
+  key: 'YOUR_APP_KEY',
+  secret: 'YOUR_APP_SECRET',
+  cluster: 'YOUR_APP_CLUSTER',
+  useTLS: true
+});
 
 export async function POST(request: Request) {
   try {
@@ -32,6 +41,9 @@ export async function POST(request: Request) {
       }
 
       const response = await sql`INSERT INTO messages (email, conversation_id, message_text) VALUES (${userEmail}, ${conversationId}, ${message})`;
+      pusher.trigger('my-channel', 'message', {
+        message: message
+      });
     }
 
     return NextResponse.json({ message: 'success' });
