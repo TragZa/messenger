@@ -40,7 +40,7 @@ export default function Sidebar() {
           isOpen ? "" : "hidden"
         }`}
       >
-        <div className="mt-[65px]">messenger App</div>
+        <div className="mt-[65px]">Messenger App</div>
         {!!session && (
           <>
             <div>{emailWithoutDomain}</div>
