@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     const response = await sql`
     INSERT INTO users (email, password) VALUES (${email}, ${hashedPassword})`;
 
-    return NextResponse.json({ message: 'success' });
+    return NextResponse.json({ message: 'Success' });
   } catch (e) {
     return NextResponse.json({ error: 'An error occurred' })
   }

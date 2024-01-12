@@ -41,13 +41,11 @@ export async function POST(request: Request) {
       }
 
       const response = await sql`INSERT INTO messages (email, conversation_id, message_text) VALUES (${userEmail}, ${conversationId}, ${message})`;
-      
-      pusher.trigger('my-channel', 'my-event', {
-        message: message
-      });
+
+      pusher.trigger('my-channel', 'my-event', { message: 'Message added' });
     }
 
-    return NextResponse.json({ message: 'success' });
+    return NextResponse.json({ message: 'Success' });
   } catch (e) {
     return NextResponse.json({ error: 'An error occurred' })
   }
@@ -108,9 +106,11 @@ export async function DELETE(request: Request) {
     const email = session?.user?.email;
 
     const response = await sql`DELETE FROM messages WHERE message_id = ${message_id} AND email = ${email}`;
+
+    pusher.trigger('my-channel', 'my-event', { message: 'Message deleted' });
   } catch (e) {
     return NextResponse.json({ error: 'An error occurred' })
   }
 
-  return NextResponse.json({ message: 'success' });
+  return NextResponse.json({ message: 'Success' });
 }

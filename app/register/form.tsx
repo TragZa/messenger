@@ -21,7 +21,7 @@ export default function Form() {
 
     if (data.message === "Email already exists") {
       alert("Email already exists");
-    } else if (data.message === "success") {
+    } else if (data.message === "Success") {
       alert("Registration successful");
     } else {
       alert("An error occurred");

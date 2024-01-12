@@ -27,7 +27,7 @@ export async function POST(request: Request) {
 
     await sql`INSERT INTO contacts (email, contact) VALUES (${email}, ${contact})`;
 
-    return NextResponse.json({ message: 'success' });
+    return NextResponse.json({ message: 'Success' });
   } catch (e) {
     return NextResponse.json({ error: 'An error occurred' })
   }
@@ -64,7 +64,7 @@ export async function DELETE(request: Request) {
     
     await sql`DELETE FROM contacts WHERE contact_id=${contact_id} AND email=${email}`;
 
-    return NextResponse.json({ message: 'success' });
+    return NextResponse.json({ message: 'Success' });
   } catch (e) {
     return NextResponse.json({ error: 'An error occurred' })
   }
