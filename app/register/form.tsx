@@ -21,6 +21,8 @@ export default function Form() {
 
     if (data.message === "Email cannot be empty") {
       alert("Email cannot be empty");
+    } else if (data.message === "Password cannot be empty") {
+      alert("Email already exists");
     } else if (data.message === "Email already exists") {
       alert("Email already exists");
     } else if (data.message === "Success") {

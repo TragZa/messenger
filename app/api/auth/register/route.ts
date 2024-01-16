@@ -10,6 +10,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'Email cannot be empty' });
     }
 
+    if (!password) {
+      return NextResponse.json({ message: 'Password cannot be empty' });
+    }
+
     const user = await sql`SELECT * FROM users WHERE email=${email}`;
 
     if (user.rows.length > 0) {
